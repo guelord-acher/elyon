@@ -143,16 +143,19 @@ export function Hero() {
 
         {/* CTAs */}
         <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row">
-          <Button size="lg" className="rounded-[0.225rem] normal-case text-base font-medium tracking-normal">
-            Commencer gratuitement
-            <ArrowRight className="size-4" data-icon="inline-end" />
+          <Button size="lg" className="rounded-[0.225rem] normal-case text-base font-medium tracking-normal" asChild>
+            <a href="/signup">
+              Commencer gratuitement
+              <ArrowRight className="size-4" data-icon="inline-end" />
+            </a>
           </Button>
           <Button
             size="lg"
             variant="outline"
             className="rounded-[0.225rem] normal-case text-base font-medium tracking-normal"
+            asChild
           >
-            Documentation
+            <a href="/docs">Documentation</a>
           </Button>
         </div>
 

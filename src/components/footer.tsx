@@ -4,36 +4,36 @@ const FOOTER_LINKS = [
   {
     label: "Produits",
     links: [
-      { title: "API d'impression", href: "#" },
-      { title: "SDK & Bibliothèques", href: "#" },
-      { title: "CLI & Outils", href: "#" },
-      { title: "Moteur de rendu", href: "#" },
+      { title: "API d'impression", href: "/products/printing-api" },
+      { title: "SDK & Bibliothèques", href: "/products/sdk-libraries" },
+      { title: "CLI & Outils", href: "/products/cli-tools" },
+      { title: "Moteur de rendu", href: "/products/render-engine" },
     ],
   },
   {
     label: "Solutions",
     links: [
-      { title: "Impression Cloud", href: "#" },
-      { title: "Automatisation", href: "#" },
-      { title: "CI/CD Print", href: "#" },
-      { title: "Traitement par lot", href: "#" },
+      { title: "Impression Cloud", href: "/solutions/cloud-printing" },
+      { title: "Automatisation", href: "/solutions/automation" },
+      { title: "CI/CD Print", href: "/solutions/cicd-print" },
+      { title: "Traitement par lot", href: "/solutions/batch-processing" },
     ],
   },
   {
     label: "Développeur",
     links: [
-      { title: "Documentation", href: "#" },
-      { title: "API Reference", href: "#" },
-      { title: "Guides de démarrage", href: "#" },
-      { title: "Statut des services", href: "#" },
+      { title: "Documentation", href: "/docs" },
+      { title: "API Reference", href: "/docs/api-reference" },
+      { title: "Guides de démarrage", href: "/docs/quickstarts" },
+      { title: "Statut des services", href: "/status" },
     ],
   },
   {
     label: "Société",
     links: [
-      { title: "À propos", href: "#" },
-      { title: "Blog", href: "#" },
-      { title: "Carrières", href: "#" },
+      { title: "À propos", href: "/about/mission" },
+      { title: "Blog", href: "/blog" },
+      { title: "Carrières", href: "/careers" },
       { title: "Contact", href: "#" },
     ],
   },
@@ -45,7 +45,7 @@ export function Footer() {
       <div className="mx-auto max-w-[1220px] px-4 py-16">
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-5">
           <div className="lg:col-span-1">
-            <a href="#" className="flex items-center gap-2 text-base font-semibold">
+            <a href="/" className="flex items-center gap-2 text-base font-semibold">
               <Icon icon="ic:baseline-auto-awesome-mosaic" className="size-5" />
               Elyon
             </a>

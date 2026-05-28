@@ -1,23 +1,22 @@
 import { Rocket, ArrowRight, Code2, Terminal, Globe, BookOpen } from "lucide-react"
 import { Button } from "@/components/ui/button"
-
 const GUIDES = [
   {
     icon: Code2,
     lang: "Python",
-    desc: "Installez le SDK pip, initialisez le client et lancez votre première impression en 5 lignes de code.",
+    desc: "Installez le SDK pip, initialisez le client et lancez votre premiÃ¨re impression en 5 lignes de code.",
     time: "5 min",
   },
   {
     icon: Code2,
     lang: "JavaScript",
-    desc: "Utilisez notre package npm pour intégrer l'impression dans vos applications Node.js ou frontend.",
+    desc: "Utilisez notre package npm pour intÃ©grer l'impression dans vos applications Node.js ou frontend.",
     time: "5 min",
   },
   {
     icon: Code2,
     lang: "Go",
-    desc: "Importez le module Go et bénéficiez de la typage statique et de la concurrence native de Go.",
+    desc: "Importez le module Go et bÃ©nÃ©ficiez de la typage statique et de la concurrence native de Go.",
     time: "5 min",
   },
   {
@@ -35,11 +34,10 @@ const GUIDES = [
   {
     icon: BookOpen,
     lang: "Templates",
-    desc: "Créez votre premier template HTML et transformez-le en PDF avec notre moteur de rendu.",
+    desc: "CrÃ©ez votre premier template HTML et transformez-le en PDF avec notre moteur de rendu.",
     time: "10 min",
   },
 ]
-
 export function Quickstarts() {
   return (
     <div className="min-h-svh pt-24">
@@ -47,18 +45,16 @@ export function Quickstarts() {
         <div className="absolute inset-0 opacity-[0.02] dark:opacity-[0.04]" style={{ backgroundImage: "linear-gradient(var(--color-border) 1px, transparent 1px), linear-gradient(90deg, var(--color-border) 1px, transparent 1px)", backgroundSize: "64px 64px" }} />
         <div className="pointer-events-none absolute -top-40 right-0 size-[500px] rounded-full bg-primary/10 blur-[120px]" />
         <div className="pointer-events-none absolute -bottom-40 left-0 size-[400px] rounded-full bg-primary/5 blur-[100px]" />
-
         <div className="relative z-10 mx-auto max-w-[1220px]">
-          <a href="/" className="text-sm text-muted-foreground hover:text-foreground transition-colors">&larr; Retour à l'accueil</a>
+          
           <div className="mt-4 flex size-14 items-center justify-center rounded-xl border border-primary/20 bg-primary/5">
             <Rocket className="size-7 text-primary" />
           </div>
-          <h1 className="mt-6 text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl max-w-3xl">Guides de démarrage</h1>
+          <h1 className="mt-6 text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl max-w-3xl">Guides de dÃ©marrage</h1>
           <p className="mt-4 text-lg leading-relaxed text-muted-foreground max-w-2xl">
             Choisissez votre langage et lancez-vous en quelques minutes.
-            Des quickstarts conçus pour vous rendre productif immédiatement.
+            Des quickstarts conÃ§us pour vous rendre productif immÃ©diatement.
           </p>
-
           <hr className="my-20 border-border/50" />
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {GUIDES.map((g) => {
