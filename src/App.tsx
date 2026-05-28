@@ -1,20 +1,22 @@
-import { Button } from "@/components/ui/button"
+import { Routes, Route } from "react-router-dom"
+import { Layout } from "@/components/layout"
+import { Home } from "@/pages/home"
+import { PrintingApi } from "@/pages/products/printing-api"
+import { SdkLibraries } from "@/pages/products/sdk-libraries"
+import { CliTools } from "@/pages/products/cli-tools"
+import { RenderEngine } from "@/pages/products/render-engine"
 
 export function App() {
   return (
-    <div className="flex min-h-svh p-6">
-      <div className="flex max-w-md min-w-0 flex-col gap-4 text-sm leading-loose">
-        <div>
-          <h1 className="font-medium">Project ready!</h1>
-          <p>You may now add components and start building.</p>
-          <p>We&apos;ve already added the button component for you.</p>
-          <Button className="mt-2">Button</Button>
-        </div>
-        <div className="font-mono text-xs text-muted-foreground">
-          (Press <kbd>d</kbd> to toggle dark mode)
-        </div>
-      </div>
-    </div>
+    <Routes>
+      <Route element={<Layout />}>
+        <Route path="/" element={<Home />} />
+        <Route path="/products/printing-api" element={<PrintingApi />} />
+        <Route path="/products/sdk-libraries" element={<SdkLibraries />} />
+        <Route path="/products/cli-tools" element={<CliTools />} />
+        <Route path="/products/render-engine" element={<RenderEngine />} />
+      </Route>
+    </Routes>
   )
 }
 
