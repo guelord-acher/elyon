@@ -1,4 +1,4 @@
-import { Users, ArrowRight, Linkedin, Twitter, Globe } from "lucide-react"
+import { Users } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 const TEAM = [

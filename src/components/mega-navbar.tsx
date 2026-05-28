@@ -124,7 +124,7 @@ export function MegaNavbar() {
       >
         <div className="flex w-fit items-center gap-0 rounded-2xl border border-border/50 bg-background/70 pl-3 pr-1.5 py-1.5 shadow-lg backdrop-blur-xl">
           <a
-            href="#"
+            href="/"
             className="mr-2 flex items-center gap-2 text-base font-semibold whitespace-nowrap"
           >
             <Icon icon="ic:baseline-auto-awesome-mosaic" className="size-5" />
@@ -168,14 +168,16 @@ export function MegaNavbar() {
               <MoonIcon className="size-4 block dark:hidden" />
             </button>
             <a
-              href="#"
+              href="/signup"
               className="px-2 py-1 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground rounded-lg hover:bg-accent"
             >
               S'inscrire
             </a>
-            <Button size="sm" className="normal-case text-sm font-medium tracking-normal rounded-lg">
-              <ArrowRight className="size-4" />
-              Se connecter
+            <Button size="sm" className="normal-case text-sm font-medium tracking-normal rounded-lg" asChild>
+              <a href="/login">
+                <ArrowRight className="size-4" />
+                Se connecter
+              </a>
             </Button>
           </div>
         </div>
@@ -186,7 +188,7 @@ export function MegaNavbar() {
       {/* Mobile */}
       <div className="fixed top-4 left-1/2 z-50 w-[calc(100%-2rem)] -translate-x-1/2 md:hidden">
         <div className="flex items-center justify-between rounded-2xl border border-border/50 bg-background/70 px-4 py-2 shadow-lg backdrop-blur-xl">
-          <a href="#" className="flex items-center gap-2 text-base font-semibold whitespace-nowrap">
+          <a href="/" className="flex items-center gap-2 text-base font-semibold whitespace-nowrap">
             <Icon icon="ic:baseline-auto-awesome-mosaic" className="size-5" />
             Elyon
           </a>
@@ -249,12 +251,14 @@ export function MegaNavbar() {
 
             <div className="flex flex-col gap-2">
               <a
-                href="#"
+                href="/signup"
                 className="text-center text-sm font-medium text-muted-foreground transition-colors hover:text-foreground rounded-lg hover:bg-accent px-2 py-1.5"
               >
                 S'inscrire
               </a>
-              <Button className="w-full normal-case text-sm font-medium tracking-normal rounded-lg">Se connecter</Button>
+              <Button className="w-full normal-case text-sm font-medium tracking-normal rounded-lg" asChild>
+                <a href="/login">Se connecter</a>
+              </Button>
             </div>
           </div>
         )}

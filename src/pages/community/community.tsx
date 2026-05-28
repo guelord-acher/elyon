@@ -1,4 +1,4 @@
-import { Users, ArrowRight, MessageCircle, Github, Forum, Twitter } from "lucide-react"
+import { Users, ArrowRight, MessageCircle, GitFork, MessageSquare, Globe } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 const CHANNELS = [
@@ -10,21 +10,21 @@ const CHANNELS = [
     href: "#",
   },
   {
-    icon: Github,
+    icon: GitFork,
     name: "GitHub",
     desc: "Explorez nos repos open-source, signalez des issues et contribuez au code.",
     cta: "Voir sur GitHub",
     href: "#",
   },
   {
-    icon: Forum,
+    icon: MessageSquare,
     name: "Forum",
     desc: "Un forum de discussion pour les questions approfondies, les suggestions et les retours d'expérience.",
     cta: "Accéder au forum",
     href: "#",
   },
   {
-    icon: Twitter,
+    icon: Globe,
     name: "X / Twitter",
     desc: "Suivez-nous pour les annonces, les astuces et les actualités de la plateforme.",
     cta: "Nous suivre",
