@@ -20,6 +20,19 @@ import { Blog } from "@/pages/blog/blog"
 import { Careers } from "@/pages/careers/careers"
 import { Login } from "@/pages/login"
 import { Signup } from "@/pages/signup"
+import { AdminLayout } from "@/components/AdminLayout"
+import { AdminLogin } from "@/pages/admin/login"
+import { BlogList } from "@/pages/admin/BlogList"
+import { BlogEdit } from "@/pages/admin/BlogEdit"
+import { Navigate } from "react-router-dom"
+import { useAuth } from "@/contexts/AuthContext"
+
+function AdminGuard() {
+  const { user, loading } = useAuth()
+  if (loading) return null
+  if (!user) return <Navigate to="/admin/login" replace />
+  return <AdminLayout />
+}
 
 export function App() {
   return (
@@ -45,6 +58,13 @@ export function App() {
         <Route path="/about/team" element={<Team />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/careers" element={<Careers />} />
+      </Route>
+      <Route path="/admin/login" element={<AdminLogin />} />
+      <Route element={<AdminGuard />}>
+        <Route path="/admin" element={<Navigate to="/admin/blog" replace />} />
+        <Route path="/admin/blog" element={<BlogList />} />
+        <Route path="/admin/blog/new" element={<BlogEdit />} />
+        <Route path="/admin/blog/:id/edit" element={<BlogEdit />} />
       </Route>
     </Routes>
   )
