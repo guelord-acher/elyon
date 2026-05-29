@@ -1,0 +1,30 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "email": "admin@elyon.dev",
+      "password": "$2a$10$aGbcT2Va9QNBGKzXiphWiO4zdwScwHMJiTymHhvH8nftDNszQOVA.",
+      "name": "Admin",
+      "createdAt": "2026-05-28T14:29:21.464Z"
+    }
+  ],
+  "posts": [
+    {
+      "title": "Mise à jour sur la facture normalisée",
+      "slug": "Facture normalisée",
+      "content": "Arrêté la présente facture à la somme de dix million six cent soixante dix neuf\nmille cinq cent soixante trois francs congolais toutes taxes comprises",
+      "excerpt": "Une mise à jour importante dans la mise en place de la réforme sur la facture normalisée en RDC",
+      "tags": [
+        "facture nomalisé",
+        "dgi"
+      ],
+      "author": "Admin",
+      "published": true,
+      "id": 1,
+      "createdAt": "2026-05-29T10:48:46.044Z",
+      "updatedAt": "2026-05-29T10:48:46.046Z"
+    }
+  ],
+  "nextUserId": 2,
+  "nextPostId": 2
+}

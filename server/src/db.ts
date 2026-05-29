@@ -1,6 +1,7 @@
 import fs from "fs"
 import path from "path"
 import { fileURLToPath } from "url"
+import bcrypt from "bcryptjs"
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const DATA_FILE = path.join(__dirname, "..", "data.json")
@@ -59,7 +60,6 @@ load()
 export async function initDb() {
   const admin = data.users.find((u) => u.email === "admin@elyon.dev")
   if (!admin) {
-    const bcrypt = await import("bcryptjs")
     const hash = await bcrypt.hash("admin123", 10)
     data.users.push({
       id: data.nextUserId++,
