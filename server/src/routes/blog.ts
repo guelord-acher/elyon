@@ -1,9 +1,13 @@
-import { Router, Request, Response } from "express"
+import { Router, Request, Response, NextFunction } from "express"
 import jwt from "jsonwebtoken"
-import { getPosts, getPostBySlug, getPostById, createPost, updatePost, deletePost } from "../db.js"
+import { getPosts, getPostBySlug, getPostById, createPost, updatePost, deletePost, toggleLike, getComments, addComment } from "../db.js"
 import { JWT_SECRET } from "./auth.js"
 
 const router = Router()
+
+function asyncHandler(fn: (req: Request, res: Response, next: NextFunction) => Promise<void>) {
+  return (req: Request, res: Response, next: NextFunction) => fn(req, res, next).catch(next)
+}
 
 function getUser(token: string): any {
   try {
@@ -13,7 +17,6 @@ function getUser(token: string): any {
   }
 }
 
-// GET /api/blog — public, only published
 router.get("/", (req: Request, res: Response) => {
   const auth = req.headers.authorization
   const admin = auth ? getUser(auth) : null
@@ -21,17 +24,16 @@ router.get("/", (req: Request, res: Response) => {
   res.json(posts)
 })
 
-// GET /api/blog/:slug — public
 router.get("/:slug", (req: Request, res: Response) => {
   const post = getPostBySlug(req.params.slug)
   if (!post) {
     res.status(404).json({ error: "Article introuvable" })
     return
   }
-  res.json(post)
+  const comments = getComments(post.id)
+  res.json({ ...post, commentCount: comments.length })
 })
 
-// POST /api/blog — admin only
 router.post("/", (req: Request, res: Response) => {
   const user = getUser(req.headers.authorization || "")
   if (!user) {
@@ -51,18 +53,10 @@ router.post("/", (req: Request, res: Response) => {
     return
   }
 
-  const post = createPost({
-    title, slug, content,
-    excerpt: excerpt || "",
-    tags: tags || [],
-    author: user.name,
-    published: !!published,
-  })
-
+  const post = createPost({ title, slug, content, excerpt: excerpt || "", tags: tags || [], author: user.name, published: !!published })
   res.status(201).json(post)
 })
 
-// PUT /api/blog/:id — admin only
 router.put("/:id", (req: Request, res: Response) => {
   const user = getUser(req.headers.authorization || "")
   if (!user) {
@@ -82,7 +76,6 @@ router.put("/:id", (req: Request, res: Response) => {
   res.json({ success: true })
 })
 
-// DELETE /api/blog/:id — admin only
 router.delete("/:id", (req: Request, res: Response) => {
   const user = getUser(req.headers.authorization || "")
   if (!user) {
@@ -93,6 +86,46 @@ router.delete("/:id", (req: Request, res: Response) => {
   const id = parseInt(req.params.id)
   deletePost(id)
   res.json({ success: true })
+})
+
+// Toggle like
+router.post("/:id/like", asyncHandler(async (req: Request, res: Response) => {
+  const id = parseInt(req.params.id)
+  const { visitorId } = req.body
+  if (!visitorId) {
+    res.status(400).json({ error: "visitorId requis" })
+    return
+  }
+  const result = toggleLike(id, visitorId)
+  res.json(result)
+}))
+
+// Get comments
+router.get("/:slug/comments", (req: Request, res: Response) => {
+  const post = getPostBySlug(req.params.slug)
+  if (!post) {
+    res.status(404).json({ error: "Article introuvable" })
+    return
+  }
+  res.json(getComments(post.id))
+})
+
+// Add comment
+router.post("/:slug/comments", (req: Request, res: Response) => {
+  const post = getPostBySlug(req.params.slug)
+  if (!post) {
+    res.status(404).json({ error: "Article introuvable" })
+    return
+  }
+
+  const { author, content } = req.body
+  if (!author || !content) {
+    res.status(400).json({ error: "Nom et contenu requis" })
+    return
+  }
+
+  const comment = addComment(post.id, author.trim(), content.trim())
+  res.status(201).json(comment)
 })
 
 export default router

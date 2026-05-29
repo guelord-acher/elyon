@@ -17,6 +17,7 @@ import { Status } from "@/pages/community/status"
 import { Mission } from "@/pages/about/mission"
 import { Team } from "@/pages/about/team"
 import { Blog } from "@/pages/blog/blog"
+import { BlogArticle } from "@/pages/blog/BlogArticle"
 import { Careers } from "@/pages/careers/careers"
 import { Login } from "@/pages/login"
 import { Signup } from "@/pages/signup"
@@ -57,6 +58,7 @@ export function App() {
         <Route path="/about/mission" element={<Mission />} />
         <Route path="/about/team" element={<Team />} />
         <Route path="/blog" element={<Blog />} />
+        <Route path="/blog/:slug" element={<BlogArticle />} />
         <Route path="/careers" element={<Careers />} />
       </Route>
       <Route path="/admin/login" element={<AdminLogin />} />

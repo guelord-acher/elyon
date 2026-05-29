@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
-import { FileEdit, Calendar, Clock } from "lucide-react"
+import { useNavigate } from "react-router-dom"
+import { FileEdit, Calendar, Clock, Heart } from "lucide-react"
 
 interface Post {
   id: number
@@ -11,6 +12,8 @@ interface Post {
   author: string
   published: boolean
   createdAt: string
+  likeCount: number
+  commentCount: number
 }
 
 function formatDate(iso: string) {
@@ -27,6 +30,7 @@ function excerptHtml(html: string, max = 120) {
 }
 
 export function Blog() {
+  const navigate = useNavigate()
   const [posts, setPosts] = useState<Post[]>([])
 
   useEffect(() => {
@@ -58,7 +62,11 @@ export function Blog() {
           ) : (
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {posts.map((p) => (
-                <article key={p.id} className="group rounded-2xl border border-border/50 bg-background/50 p-6 transition-all duration-300 hover:border-primary/30 hover:bg-background/80 cursor-pointer">
+                <article
+                  key={p.id}
+                  onClick={() => navigate(`/blog/${p.slug}`)}
+                  className="group rounded-2xl border border-border/50 bg-background/50 p-6 transition-all duration-300 hover:border-primary/30 hover:bg-background/80 cursor-pointer"
+                >
                   <div className="flex items-center gap-2 mb-4 flex-wrap">
                     {p.tags.map((t) => (
                       <span key={t} className="rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-medium text-primary">{t}</span>
@@ -74,6 +82,10 @@ export function Blog() {
                   </div>
                   <h3 className="font-semibold group-hover:text-primary transition-colors">{p.title}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-muted-foreground line-clamp-3">{p.excerpt || excerptHtml(p.content)}</p>
+                  <div className="flex items-center gap-3 mt-4 text-xs text-muted-foreground">
+                    <span className="flex items-center gap-1"><Heart className="size-3" /> {p.likeCount || 0}</span>
+                    <span className="flex items-center gap-1">{p.commentCount || 0} commentaire{(p.commentCount || 0) > 1 ? "s" : ""}</span>
+                  </div>
                 </article>
               ))}
             </div>
