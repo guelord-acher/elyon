@@ -1,5 +1,6 @@
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
-import { ArrowRight, Sparkles } from "lucide-react"
+import { ArrowRight, Sparkles, Users } from "lucide-react"
 
 const LOGOS = [
   {
@@ -93,6 +94,15 @@ const LOGOS = [
 ]
 
 export function Hero() {
+  const [userCount, setUserCount] = useState<number | null>(null)
+
+  useEffect(() => {
+    fetch("/api/auth/users/count")
+      .then((r) => r.ok ? r.json() : null)
+      .then((d) => { if (d) setUserCount(d.count) })
+      .catch(() => {})
+  }, [])
+
   return (
     <section className="relative flex min-h-screen items-center justify-center overflow-hidden px-4 pt-20">
       <style>{`
@@ -158,6 +168,16 @@ export function Hero() {
             <a href="/docs">Documentation</a>
           </Button>
         </div>
+
+        {/* User count */}
+        {userCount !== null && (
+          <div className="mt-10 flex items-center gap-2 text-sm text-muted-foreground">
+            <Users className="size-4" />
+            <span>
+              <strong className="text-foreground">{userCount}</strong> développeur{userCount > 1 ? "s" : ""} déjà inscrit{userCount > 1 ? "s" : ""}
+            </span>
+          </div>
+        )}
 
         {/* Social proof */}
         <div className="mt-20 flex w-full flex-col items-center gap-6">

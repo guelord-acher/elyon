@@ -144,6 +144,39 @@ export function getUserByEmail(email: string): User | undefined {
   return data.users.find((u) => u.email === email)
 }
 
+export function createUser(email: string, password: string, name: string): User {
+  const user: User = {
+    id: data.nextUserId++,
+    email,
+    password,
+    name,
+    createdAt: new Date().toISOString(),
+  }
+  data.users.push(user)
+  save()
+  return user
+}
+
+export function getUserCount(): number {
+  return data.users.length
+}
+
+export function getAllUsers(): Omit<User, "password">[] {
+  return data.users.map(({ password, ...rest }) => rest)
+}
+
+export function getUserById(id: number): User | undefined {
+  return data.users.find((u) => u.id === id)
+}
+
+export function deleteUserById(id: number): boolean {
+  const idx = data.users.findIndex((u) => u.id === id)
+  if (idx === -1) return false
+  data.users.splice(idx, 1)
+  save()
+  return true
+}
+
 export function toggleLike(postId: number, visitorId: string): { liked: boolean; count: number } {
   const post = data.posts.find((p) => p.id === postId)
   if (!post) throw new Error("Post not found")

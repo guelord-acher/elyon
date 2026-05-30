@@ -1,9 +1,32 @@
 import { useState } from "react"
+import { useNavigate } from "react-router-dom"
 import { ArrowRight, Eye, EyeOff, Mail, Lock, User } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { useAuth } from "@/contexts/AuthContext"
 
 export function Signup() {
   const [showPassword, setShowPassword] = useState(false)
+  const [name, setName] = useState("")
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [error, setError] = useState("")
+  const [loading, setLoading] = useState(false)
+  const { signup } = useAuth()
+  const navigate = useNavigate()
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setError("")
+    setLoading(true)
+    try {
+      await signup(name, email, password)
+      navigate("/")
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Erreur d'inscription")
+    } finally {
+      setLoading(false)
+    }
+  }
 
   return (
     <div className="min-h-svh pt-24">
@@ -24,7 +47,13 @@ export function Signup() {
             Rejoignez Elyon et commencez à imprimer en quelques minutes.
           </p>
 
-          <form className="mt-8 flex flex-col gap-5" onSubmit={(e) => e.preventDefault()}>
+          {error && (
+            <p className="mt-4 rounded-lg bg-destructive/10 px-4 py-2 text-sm text-destructive">
+              {error}
+            </p>
+          )}
+
+          <form className="mt-8 flex flex-col gap-5" onSubmit={handleSubmit}>
             <div>
               <label htmlFor="name" className="text-sm font-medium">Nom complet</label>
               <div className="mt-1.5 relative">
@@ -33,6 +62,9 @@ export function Signup() {
                   id="name"
                   type="text"
                   placeholder="Jean Dupont"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  required
                   className="w-full rounded-xl border border-border/50 bg-background/50 py-2.5 pl-10 pr-4 text-sm outline-none transition-colors placeholder:text-muted-foreground/50 focus:border-primary/50 focus:ring-2 focus:ring-primary/10"
                 />
               </div>
@@ -46,6 +78,9 @@ export function Signup() {
                   id="email"
                   type="email"
                   placeholder="vous@exemple.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
                   className="w-full rounded-xl border border-border/50 bg-background/50 py-2.5 pl-10 pr-4 text-sm outline-none transition-colors placeholder:text-muted-foreground/50 focus:border-primary/50 focus:ring-2 focus:ring-primary/10"
                 />
               </div>
@@ -59,6 +94,10 @@ export function Signup() {
                   id="password"
                   type={showPassword ? "text" : "password"}
                   placeholder="Au moins 8 caractères"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                  minLength={8}
                   className="w-full rounded-xl border border-border/50 bg-background/50 py-2.5 pl-10 pr-10 text-sm outline-none transition-colors placeholder:text-muted-foreground/50 focus:border-primary/50 focus:ring-2 focus:ring-primary/10"
                 />
                 <button
@@ -73,7 +112,7 @@ export function Signup() {
 
             <div className="flex flex-col gap-2 text-sm text-muted-foreground">
               <label className="flex items-center gap-2">
-                <input type="checkbox" className="rounded border-border/50 bg-background/50 text-primary focus:ring-primary/20" />
+                <input type="checkbox" className="rounded border-border/50 bg-background/50 text-primary focus:ring-primary/20" required />
                 <span>J'accepte les <a href="#" className="text-primary hover:underline">conditions d'utilisation</a></span>
               </label>
               <label className="flex items-center gap-2">
@@ -82,8 +121,8 @@ export function Signup() {
               </label>
             </div>
 
-            <Button size="lg" className="rounded-lg normal-case text-base font-medium tracking-normal">
-              Créer mon compte
+            <Button size="lg" className="rounded-lg normal-case text-base font-medium tracking-normal" type="submit" disabled={loading}>
+              {loading ? "Inscription..." : "Créer mon compte"}
               <ArrowRight className="size-4" />
             </Button>
           </form>

@@ -39,10 +39,33 @@ const FEATURES = [
   },
 ]
 
+function Card({ icon: Icon, title, description }: { icon: any; title: string; description: string }) {
+  return (
+    <div className="group relative overflow-hidden rounded-2xl border border-border/50 bg-background/50 p-6 transition-all duration-500 hover:border-primary/30 hover:bg-background/80 hover:shadow-lg hover:shadow-primary/5">
+      <div className="relative z-10 flex flex-col">
+        <div className="flex size-10 shrink-0 items-center justify-center rounded-xl border border-border/50 bg-gradient-to-br from-primary/10 to-primary/5 transition-all duration-500 group-hover:border-primary/30 group-hover:from-primary/15 group-hover:to-primary/5">
+          <Icon className="size-5 text-primary" />
+        </div>
+        <div className="mt-4">
+          <h3 className="font-semibold">{title}</h3>
+          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+            {description}
+          </p>
+        </div>
+      </div>
+      <div
+        className="pointer-events-none absolute -inset-px rounded-2xl opacity-0 transition-all duration-500 group-hover:opacity-100"
+        style={{
+          background: `radial-gradient(280px at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(var(--color-primary) / 0.06), transparent)`,
+        }}
+      />
+    </div>
+  )
+}
+
 export function Features() {
   return (
     <section className="relative overflow-hidden px-4 py-24 sm:py-32">
-      {/* Decorative grid */}
       <div
         className="absolute inset-0 opacity-[0.02] dark:opacity-[0.04]"
         style={{
@@ -51,13 +74,10 @@ export function Features() {
           backgroundSize: "64px 64px",
         }}
       />
-
-      {/* Gradient blobs */}
       <div className="pointer-events-none absolute -left-40 top-1/2 size-[400px] -translate-y-1/2 rounded-full bg-primary/5 blur-[100px]" />
       <div className="pointer-events-none absolute -right-40 top-1/2 size-[350px] -translate-y-1/2 rounded-full bg-primary/10 blur-[120px]" />
 
-      <div className="relative z-10 mx-auto max-w-[1220px]">
-        {/* Section header */}
+      <div className="relative z-10 mx-auto max-w-[1120px]">
         <div className="max-w-2xl">
           <h2 className="text-2xl font-bold tracking-tight sm:text-3xl md:text-4xl">
             Tout ce qu'il vous faut pour
@@ -70,25 +90,10 @@ export function Features() {
           </p>
         </div>
 
-        {/* Features grid */}
         <div className="mt-16 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {FEATURES.map((feature) => {
-            const Icon = feature.icon
-            return (
-              <div
-                key={feature.title}
-                className="group relative rounded-2xl border border-border/50 bg-background/50 p-6 transition-all duration-300 hover:border-primary/30 hover:bg-background/80 hover:shadow-lg hover:shadow-primary/5"
-              >
-                <div className="flex size-10 items-center justify-center rounded-lg border border-border/50 bg-muted/50 transition-colors group-hover:border-primary/30 group-hover:bg-primary/5">
-                  <Icon className="size-5 text-primary" />
-                </div>
-                <h3 className="mt-4 text-base font-semibold">{feature.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                  {feature.description}
-                </p>
-              </div>
-            )
-          })}
+          {FEATURES.map((f) => (
+            <Card key={f.title} icon={f.icon} title={f.title} description={f.description} />
+          ))}
         </div>
       </div>
     </section>

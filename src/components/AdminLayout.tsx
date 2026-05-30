@@ -13,6 +13,9 @@ export function AdminLayout() {
           <Link to="/admin/blog" className="px-3 py-2 rounded-lg hover:bg-muted transition-colors text-sm">
             Articles
           </Link>
+          <Link to="/admin/users" className="px-3 py-2 rounded-lg hover:bg-muted transition-colors text-sm">
+            Utilisateurs
+          </Link>
         </nav>
         <div className="mt-auto flex flex-col gap-2">
           <span className="text-xs text-muted-foreground px-3">{user?.name}</span>

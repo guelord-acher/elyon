@@ -25,6 +25,7 @@ import { AdminLayout } from "@/components/AdminLayout"
 import { AdminLogin } from "@/pages/admin/login"
 import { BlogList } from "@/pages/admin/BlogList"
 import { BlogEdit } from "@/pages/admin/BlogEdit"
+import { UserList } from "@/pages/admin/UserList"
 import { Navigate } from "react-router-dom"
 import { useAuth } from "@/contexts/AuthContext"
 
@@ -67,6 +68,7 @@ export function App() {
         <Route path="/admin/blog" element={<BlogList />} />
         <Route path="/admin/blog/new" element={<BlogEdit />} />
         <Route path="/admin/blog/:id/edit" element={<BlogEdit />} />
+        <Route path="/admin/users" element={<UserList />} />
       </Route>
     </Routes>
   )
